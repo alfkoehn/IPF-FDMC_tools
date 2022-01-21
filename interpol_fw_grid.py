@@ -85,7 +85,37 @@ def make_fullwave_interpolation( x_old, y_old, z_old,
                                  fill_value=[],
                                  silent=False, debug=False
                                ):
-#;{{{
+#{{{
+    """
+    Return the grid to be used in IPF-FDMC runs.
+
+    Multiple methods how to perform the actual interpolations are possible.
+    Currently, using the best method is hard-coded, but can be changed by
+    changing the value of the variable interp_method (4 is best).
+
+    Parameters
+    ----------
+    x_old, y_old : 1D array
+        Arrays with coordinates of original (to be interpolated) data.
+    z_old :
+    x_new, y_new : 1D array, optional
+    x_new_lim, y_new_lim :
+    f_0 : float, optional
+        Frequency of microwave to be simulated in IPF-FDMC, in units of Hz.
+    period : int, optional
+        Number of grid points per vacuum wavelength. Note that this 
+        corresponds to the actually used grid, i.e. in units of Yee cells it
+        is period/2.
+    add_absorber : bool, optional
+    kill_negatives : bool, optional
+    suppress_extrapolation : bool, optional
+    fill_value :
+    silent : bool, optional
+    debug : bool, optional
+
+    Returns
+    -------
+    """
 
     errValue = -1
 
@@ -279,7 +309,7 @@ def make_fullwave_interpolation( x_old, y_old, z_old,
         print( "      max = {0:13.6e} (old = {1:13.6e})".format( np.amax(z_new), np.amax(z_old) ) )
 
     return z_new
-#;}}}
+#}}}
 
 
 
