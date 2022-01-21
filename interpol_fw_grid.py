@@ -3,7 +3,7 @@
 
 """
 Wrapper for the interpolation function found in myInterpolation tailored
-for computational grid used in IPF-FDMC.
+for computational grids used in IPF-FDMC.
 """
 
 __author__      = 'Alf Köhn-Seemann'
@@ -22,7 +22,37 @@ def get_new_spatial_axis(
                           add_absorber=False,
                           silent=False,
                         ):
-#;{{{
+#{{{
+    """
+    Create spatial axis for full-wave grid used in IPF-FDMC.
+
+    This function simply returns an evenly spaced 1D array corresponding to
+    one of the spatial axis of the computational grid used in IPF-FDMC. 
+
+    Parameters
+    ----------
+    x0, x1 : float
+        `x0` and `x1` are the starting and end point of the axis un units of
+        meters.
+    l_0 : float, optional
+        Vacuum wavelength of the microwave simulated in IPF-FDMC in units of
+        meters.
+    period : int (or float)
+        Number of grid points per vacuum wavelength. Note that this 
+        corresponds to the actually used grid, i.e. in units of Yee cells it
+        is period/2.
+    add_absorber : bool, optional
+        Optionally add absorbers of the default width to the beginning and to
+        the end of the axis. Warning: the default value is hard-coded here
+        which is a bad idea and should be changed.
+    silent : bool, optional
+        Optionally print some output to the console while running.
+
+    Returns
+    -------
+    1D numpy array
+    """
+
     # get size of new axis
     N_x = int( round( (abs(x1-x0)/l_0 * period), 0 ) )
 
@@ -43,7 +73,7 @@ def get_new_spatial_axis(
 
     return x_new
 
-#;}}}
+#}}}
 
 
 def make_fullwave_interpolation( x_old, y_old, z_old, 
